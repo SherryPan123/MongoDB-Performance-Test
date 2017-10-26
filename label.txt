@@ -1,0 +1,177 @@
+
+JFIFVersion
+Resolution Unit
+X-Resolution
+Y-Resolution
+Image Description
+Make
+Model
+Orientation
+Resolution Unit
+Software
+Date and Time (Modified)
+YCbCr Positioning
+Exposure
+Aperture
+Exposure Program
+ISO Speed
+Sensitivity Type
+Exif Version
+Date and Time (Original)
+Date and Time (Digitized)
+Components Configuration
+Exposure Bias
+Max Aperture Value
+Metering Mode
+Light Source
+Flash
+Focal Length
+Sub Sec Time
+Flashpix Version
+Color Space
+File Source
+Custom Rendered
+Exposure Mode
+White Balance
+Digital Zoom Ratio
+Scene Capture Type
+Gain Control
+Contrast
+Saturation
+Sharpness
+Lens Info
+Lens Model
+Special Mode
+Camera ID
+Equipment Version
+Camera Type2
+Serial Number
+Internal Serial Number
+Focal Plane Diagonal
+Body Firmware Version
+Lens Type
+Lens Serial Number
+Lens Model
+Lens Firmware Version
+Max Aperture At Min Focal
+Max Aperture At Max Focal
+Min Focal Length
+Max Focal Length
+Max Aperture At Current Focal
+Lens Properties
+Extender
+Extender Firmware Version
+Flash Type
+Flash Model
+Flash Firmware Version
+Camera Settings Version
+Preview Image Valid
+Preview Image Start
+Preview Image Length
+Exposure Mode
+AELock
+Metering Mode
+Exposure Shift
+Macro Mode
+Focus Mode
+Focus Process
+AFSearch
+AFAreas
+AFPoint Selected
+AFFine Tune Adj
+Flash Mode
+Flash Exposure Comp
+Flash Remote Control
+Flash Control Mode
+Flash Intensity
+Manual Flash Strength
+White Balance2
+White Balance Temperature
+White Balance Bracket
+Custom Saturation
+Modified Saturation
+Contrast Setting
+Sharpness Setting
+Color Space
+Scene Mode
+Noise Reduction
+Distortion Correction
+Shading Compensation
+Compression Factor
+Gradation
+Picture Mode
+Picture Mode Saturation
+Picture Mode Contrast
+Picture Mode Sharpness
+Picture Mode BWFilter
+Picture Mode Tone
+Noise Filter
+Art Filter
+Drive Mode
+Panorama Mode
+Image Stabilization
+Manometer Pressure
+Manometer Reading
+Extended WBDetect
+Raw Dev Version
+Raw Dev Exposure Bias Value
+Raw Dev White Balance Value
+Raw Dev WBFine Adjustment
+Raw Dev Gray Point
+Raw Dev Saturation Emphasis
+Raw Dev Memory Color Emphasis
+Raw Dev Contrast Value
+Raw Dev Sharpness Value
+Raw Dev Color Space
+Raw Dev Engine
+Raw Dev Noise Reduction
+Raw Dev Edit Status
+Raw Dev Settings
+Image Processing Version
+WB_ RBLevels
+Color Matrix
+Black Level2
+Gain Base
+Crop Left
+Crop Top
+Crop Width
+Crop Height
+Noise Reduction2
+Distortion Correction2
+Shading Compensation2
+Multiple Exposure Mode
+Aspect Ratio
+Aspect Frame
+Faces Detected
+Face Detect Area
+Max Faces
+Face Detect Frame Size
+Face Detect Frame Crop
+Focus Info Version
+Scene Detect
+Zoom Step Count
+Focus Step Count
+Focus Step Infinity
+Focus Step Near
+Focus Distance
+AFPoint
+External Flash
+External Flash Bounce
+External Flash Zoom
+Internal Flash
+Manual Flash
+Sensor Temperature
+Interop Index
+Interop Version
+GPS Version ID
+GPS Latitude Ref
+GPS Latitude
+GPS Longitude Ref
+GPS Longitude
+GPS Altitude Ref
+GPS Altitude
+Compression
+Thumbnail Offset
+Thumbnail Length
+Keywords
+IPTCDigest
