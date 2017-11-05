@@ -1,190 +1,92 @@
-import main
-
-import os
+import users
+import comment
+import camera
+import photo
 
 import xml.etree.ElementTree as ET
 
+# return a photo
+aPhoto = photo.Photo()
 
-def parseinfo(xmlname,filename):
+def parseinfo(Id):
     try:
-
         labelfile = open('label.txt')
         labels = labelfile.readlines()
-
-        writeText = ''
+        xmlname = Id + '_exif.xml'
+        filename = Id + '_info.txt'
         f=open(xmlname)
         tree = ET.parse(f)
         root = tree.getroot()
-        camera = 'Camera: '
-        photoid = 'Photo ID: '
-        photo = root.iter('photo')
         exif = root.iter('exif')
 
-        for p in photo:
-            camera = camera + p.get('camera') + '\n'
-            photoid = photoid + p.get('id') + '\n'
-
-        writeText = writeText + photoid + camera
-
+        for p in root.iter('photo'):
+            aPhoto.addPair('photoID', p.get('id'))
+            cm = camera.Camera(p.get('camera'))
+            aPhoto.setCamera(cm)
         for e in exif:
             for label in labels:
                 if e.get('label') == label.strip():
                     child = e.getchildren()[0]
-                    temp = label.strip() + ': ' + child.text + '\n'
-                    writeText = writeText + temp
-
-
+                    key = label.strip().replace(" ", "_").replace("-", "_")
+                    value = child.text
+                    aPhoto.addPair(key, value)
 
         f = open(filename)
         tree = ET.parse(f)
         root = tree.getroot()
-        photoid = 'Photo ID: '
-        photo = root.iter('photo')
-        title = root.iter('title')
-        owner = root.iter('owner')
-        UserID = 'User ID: '
+        for v in root.iter('title'):
+            aPhoto.addPair('title', v.text)
+        owner = users.User()
+        for us in root.iter('owner'):
+            owner.addPair('nsid', us.get('nsid'))
+            owner.addPair('username', us.get('username'))
+            owner.addPair('realname', us.get('realname'))
+            owner.addPair('location', us.get('location'))
+            owner.addPair('iconserver', us.get('iconserver'))
+        aPhoto.setOwner(owner)
 
-        for user in owner:
-            UserID = UserID + user.get('nsid') + '\n'
-        writeText = writeText + UserID
-
-        IsFavotite = 'IsFavorite: '
-        SaveLevel = 'Save_Level: '
-        Rotation = 'Rotation: '
-
-        for p in photo:
-            IsFavotite = IsFavotite + p.get('isfavorite') + '\n'
-            SaveLevel = SaveLevel + p.get('safety_level') + '\n'
-            Rotation = Rotation + p.get('rotation') + '\n'
-
-        writeText = writeText + IsFavotite + SaveLevel + Rotation
+        for p in root.iter('photo'):
+            aPhoto.addPair('isFavorite', p.get('isfavorite'))
+            aPhoto.addPair('safetyLevel', p.get('safety_level'))
+            aPhoto.addPair('rotation', p.get('rotation'))
 
         visibility = root.iter('visibility')
-        IsFamily = 'IsFamily: '
-        IsFriend = 'IsFriend: '
-        IsPublic = 'IsPublic: '
-
         for v in visibility:
-            IsFamily = IsFamily + v.get('isfamily') + '\n'
-            IsFriend = IsFriend + v.get('isfriend') + '\n'
-            IsPublic = IsPublic + v.get('ispublic') + '\n'
-
-        writeText = writeText + IsFamily + IsFriend + IsPublic
-
-        URL = 'URL: '
-
-        address = root.iter('url')
-
-        for a in address:
-            URL = URL + a.text + '\n'
-
-        writeText = writeText + URL
-
-        location = root.iter('location')
-        Site = 'Location: Country: '
-        Latitude = 'Latitude: '
-        Longitude = 'Longitude: '
-
-        for l in location:
-            Latitude = Latitude + str(l.get('latitude')) + '\n'
-            Longitude = Longitude + str(l.get('longitude')) + '\n'
-
+            aPhoto.addPair('isFamily', v.get('isfamily'))
+            aPhoto.addPair('isFriend', v.get('isfriend'))
+            aPhoto.addPair('isPublic', v.get('ispublic'))
+        for a in root.iter('url'):
+            aPhoto.addPair('url', a.text)
+        for l in root.iter('location'):
+            aPhoto.addPair('latitude', l.get('latitude'))
+            aPhoto.addPair('longitude', l.get('longitude'))
             child = l.getchildren()
-            Site = Site + child[0].text + ', Region: ' + child[1].text + ', County: ' + child[2].text + ',' \
-                                                                                                        ' Neighbourhood: ' + \
-                   child[3].text + '\n'
-
-        dates = root.iter('dates')
-        ReleaseTime = 'ReleaseTime: '
-
-        for d in dates:
-            ReleaseTime = ReleaseTime + d.get('taken') + '\n'
-
-        writeText = writeText + ReleaseTime
-
-        cancomment = 'CanComment: '
-        comment = 'commnent: '
-        haspeople = 'haspeople: '
-
-        candownload = 'CanDownload: '
-        canshare = 'CanShare: '
-        canprint = 'CanPrint: '
-        canblog = 'CanBlog: '
-
-        temp = root.iter('editability')
-
-        for t in temp:
-            cancomment = cancomment + t.get('cancomment') + '\n'
-
-        writeText = writeText + cancomment
-
-        temp = root.iter('usage')
-
-        for t in temp:
-            canshare = canshare + t.get('canshare') + '\n'
-            canprint = canprint + t.get('canprint') + '\n'
-            canblog = canblog + t.get('canblog') + '\n'
-            candownload = candownload + t.get('candownload') + '\n'
-
-        writeText = writeText + candownload + canshare + canprint + canblog
-
-        temp = root.iter('comments')
-
-        for t in temp:
-            comment = comment + t.text + '\n'
-
-        writeText = writeText + comment
-
-        temp = root.iter('people')
-
-        for t in temp:
-            haspeople = haspeople + t.get('haspeople') + '\n'
-
-        writeText = writeText + haspeople
-
-        writeText = writeText + Longitude + Latitude + Site
-
-
-        # f = open('temp.txt', 'w')
-
-        writeText = writeText + UserID
-        UserName = 'UserName: '
-        RealName = 'RealName: '
-        iconsever = 'iconserver: '
-        temp = root.iter('owner')
-
-        for user in temp:
-            UserName = UserName + user.get('username') + '\n'
-            RealName = RealName + user.get('realname') + '\n'
-            iconsever = iconsever + user.get('iconserver') + '\n'
-        writeText = writeText + UserName + RealName + Site + iconsever
-
-
-        print (writeText)
-
-
-
-        f = open('temp.txt', 'a')
-        f.writelines(writeText)
-        f.close()
-
+            aPhoto.addPair('country', child[0].text)
+            aPhoto.addPair('region', child[1].text)
+            aPhoto.addPair('county', child[2].text)
+            aPhoto.addPair('neighbourhood', child[3].text)
+        for d in root.iter('dates'):
+            aPhoto.addPair('releaseTime', d.get('longitude'))
+        for t in root.iter('editability'):
+            aPhoto.addPair('canComment', t.get('cancomment'))
+        for t in root.iter('usage'):
+            aPhoto.addPair('canShare', t.get('canshare'))
+            aPhoto.addPair('canPrint', t.get('canprint'))
+            aPhoto.addPair('canBlog', t.get('canblog'))
+            aPhoto.addPair('canDownload', t.get('candownload'))
+        comments = comment.Comment()
+        for t in root.iter('comments'):
+            comments.addPair('text',t.text)
+        aPhoto.setComment(comments)
+        aPhoto.printPhoto()
 
     except Exception as e:
         print(e)
     finally:
         print('Done')
 
-
-
-
-
-
-
-
-
-
-
-parseinfo('8396784221_exif.xml','29126181995_info.txt')
+# call the function 'parseinfo'
+parseinfo('8396784221')
 
 
 
