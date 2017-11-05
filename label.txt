@@ -1,0 +1,19 @@
+id
+GPS Longitude
+GPS Latitude
+X-Resolution
+Y-Resolution
+Orientation
+Software
+Date and Time(Modified)
+Exposure
+Aperture
+Date and Time(Original)
+Color Space
+GPS Latitude Ref
+GPS Longtitude Ref
+GPS Altitude Ref
+GPS Altitude
+Camera ID
+Camera
+Camera Type2
