@@ -14,6 +14,7 @@ def parseinfo(Id):
         labels = labelfile.readlines()
         xmlname = Id + '_exif.xml'
         filename = Id + '_info.txt'
+        picturename = Id + '.jpg'
         f=open(xmlname)
         tree = ET.parse(f)
         root = tree.getroot()
@@ -23,6 +24,7 @@ def parseinfo(Id):
             aPhoto.addPair('photoID', p.get('id'))
             cm = camera.Camera(p.get('camera'))
             aPhoto.setCamera(cm)
+        aPhoto.addPair('picturePath', picturename)
         for e in exif:
             for label in labels:
                 if e.get('label') == label.strip():
