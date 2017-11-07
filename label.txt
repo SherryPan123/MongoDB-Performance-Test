@@ -17,3 +17,5 @@ GPS Altitude
 Camera ID
 Camera
 Camera Type2
+Make
+Model

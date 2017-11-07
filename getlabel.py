@@ -20,19 +20,26 @@ def parseinfo(Id):
         root = tree.getroot()
         exif = root.iter('exif')
 
-        for p in root.iter('photo'):
-            aPhoto.addPair('photoID', p.get('id'))
-            cm = camera.Camera(p.get('camera'))
-            aPhoto.setCamera(cm)
+        # for p in root.iter('photo'):
+        #     aPhoto.addPair('photoID', p.get('id'))
+        #     cm = camera.Camera(p.get('camera'))
+        #     aPhoto.setCamera(cm)
         aPhoto.addPair('picturePath', picturename)
+        cm = camera.Camera()
         for e in exif:
             for label in labels:
-                if e.get('label') == label.strip():
+                label = label.strip()
+                if e.get('label') == label:
                     child = e.getchildren()[0]
-                    key = label.strip().replace(" ", "_").replace("-", "_")
+                    key = label.replace(" ", "_").replace("-", "_")
                     value = child.text
-                    aPhoto.addPair(key, value)
-
+                    if label == 'Make':
+                        cm.addMake(value)
+                    elif label == 'Model':
+                        cm.addModel(value)
+                    else:
+                        aPhoto.addPair(key, value)
+        aPhoto.setCamera(cm)
         f = open(filename)
         tree = ET.parse(f)
         root = tree.getroot()
